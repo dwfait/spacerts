@@ -1,29 +1,39 @@
-CPP_FILES := $(wildcard src/*.cpp)
-TEST_CPP_FILES := $(wildcard test/*.cpp)
-OBJ_FILES := $(addprefix obj/,$(notdir $(CPP_FILES:.cpp=.o)))
-TEST_OBJ_FILES := $(addprefix test_obj/,$(notdir $(TEST_CPP_FILES:.cpp=.o)))
-LD_FLAGS :=  -lstdc++ -lsfml-system.2 -lsfml-window.2 -lsfml-graphics.2 -stdlib=libc++
-CC_FLAGS := -Wall -Wextra -pedantic -std=c++11 -stdlib=libc++ -I/usr/include/nvidia-current
+SOURCE := $(wildcard src/*.cpp)
+OBJECTS := $(addprefix obj/,$(notdir $(SOURCE:.cpp=.o)))
 
-all: bin/spacerts bin/test
+TEST_SOURCE := $(wildcard test/*.cpp)
+TEST_OBJECTS := $(addprefix test_obj/,$(notdir $(TEST_SOURCE:.cpp=.o)))
 
-test: bin/test
-		bin/test
+LINK_FLAGS :=  -lstdc++ -lsfml-system.2 -lsfml-window.2 -lsfml-graphics.2 -stdlib=libc++
+COMPILE_FLAGS := -Wall -Wextra -pedantic -std=c++11 -stdlib=libc++ -I/usr/include/nvidia-current
 
-bin/spacerts: $(OBJ_FILES)
-	mkdir -p bin/
-	clang++ -o $@ $^ $(LD_FLAGS)
+TARGET := bin/spacerts
+TEST_TARGET := bin/test
 
-bin/test: $(TEST_OBJ_FILES)
-	clang++ -o $@ $^ $(LD_FLAGS)
+all: $(TARGET) $(TEST_TARGET)
+
+$(TARGET): $(OBJECTS)
+	@mkdir -p bin/
+	clang++ -o $@ $^ $(LINK_FLAGS)
+
+test: $(TEST_TARGET)
+	@$(TEST_TARGET)
+
+$(TEST_TARGET): $(TEST_OBJECTS) $(filter-out obj/main.o, $(OBJECTS))
+	@mkdir -p bin/
+	clang++ -o $@ $^ $(LINK_FLAGS)
+
 
 obj/%.o: src/%.cpp
-	mkdir -p obj/
-	clang++ $(CC_FLAGS) -c -o $@ $<
+	@mkdir -p obj/
+	clang++ $(COMPILE_FLAGS) -c -o $@ $<
 
 test_obj/%.o: test/%.cpp
-	mkdir -p test_obj/
-	clang++ $(CC_FLAGS) -c -o $@ $<
+	@mkdir -p test_obj/
+	clang++ $(COMPILE_FLAGS) -c -o $@ $<
+
+run: $(TARGET)
+	@$(TARGET)
 
 clean:
-	rm -f obj/*.o bin/* test_obj/*.o
+	@rm -f obj/*.o bin/* test_obj/*.o
