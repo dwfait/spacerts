@@ -2,5 +2,10 @@
 
 unsigned int StateManager::state_count()
 {
-  return 0;
+  return states.size();
+}
+
+void StateManager::add(State& state)
+{
+  states.push_back(state);
 }

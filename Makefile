@@ -19,6 +19,9 @@ $(TARGET): $(OBJECTS)
 test: $(TEST_TARGET)
 	@$(TEST_TARGET)
 
+ct: clean $(TEST_TARGET)
+	@$(TEST_TARGET)
+
 $(TEST_TARGET): $(TEST_OBJECTS) $(filter-out obj/main.o, $(OBJECTS))
 	@mkdir -p bin/
 	clang++ -o $@ $^ $(LINK_FLAGS)

@@ -1,9 +1,15 @@
 #include <iostream>
 #include "exceptions.h"
+#include "graphics.h"
 
-int main(int argc, char** argv)
+int main()
 {
-  std::cout << "Hello world" << std::endl;
+  Graphics graphics{};
+
+  while (true)
+  {
+    graphics.render();
+  }
 
   return 0;
 }
