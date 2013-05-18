@@ -11,8 +11,10 @@ class World
 
     void add(Entity& entity);
 
+    std::vector<Entity>& entities();
+
   private:
-    std::vector<Entity> entities;
+    std::vector<Entity> m_entities;
 
 };
 

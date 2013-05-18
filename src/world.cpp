@@ -2,10 +2,15 @@
 
 unsigned int World::entity_count()
 {
-  return entities.size();
+  return m_entities.size();
 }
 
 void World::add(Entity& entity)
 {
-  entities.push_back(entity);
+  m_entities.push_back(entity);
+}
+
+std::vector<Entity>& World::entities()
+{
+  return m_entities;
 }

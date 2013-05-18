@@ -22,3 +22,14 @@ TEST_CASE("World/add", "Can add an entity to the world")
 
   REQUIRE(world.entity_count() == 1);
 }
+
+TEST_CASE("World/retrieve entity", "Can get the entities from the world")
+{
+  World world;
+
+  TestEntity entity{};
+
+  world.add(entity);
+
+  REQUIRE_NOTHROW(world.entities().at(0));
+}
