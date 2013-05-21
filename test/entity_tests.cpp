@@ -1,15 +1,11 @@
 #include "catch/catch.hpp"
 #include "../src/entity.h"
 
-//class TestEntity : public Entity
-//{
-//};
-
 TEST_CASE("Entity/new", "New entity has a valid ID")
 {
   Entity entity{};
 
-  REQUIRE(entity.id() >= 0);
+  REQUIRE(entity.id() > 0);
 }
 
 TEST_CASE("Entity/unique", "New entity has a unique ID")
