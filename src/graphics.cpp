@@ -6,7 +6,7 @@ Graphics::Graphics() :
 {
 }
 
-void Graphics::render()
+void Graphics::render(StatePtr state)
 {
   window.clear(sf::Color::Black);
 

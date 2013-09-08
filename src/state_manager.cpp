@@ -1,11 +1,22 @@
 #include "state_manager.h"
 
-unsigned int StateManager::state_count()
+StateManager::StateManager(StatePtr initial_state)
 {
-  return states.size();
+  m_repo.insert(initial_state);
+  m_current_state = initial_state;
 }
 
-void StateManager::add(State& state)
+void StateManager::add(StatePtr state)
 {
-  states.push_back(state);
+  m_repo.insert(state);
+}
+
+StatePtr StateManager::current_state()
+{
+  return m_current_state;
+}
+
+void StateManager::update_current_state()
+{
+
 }

@@ -1,15 +1,12 @@
 #include <iostream>
 #include "exceptions.h"
-#include "graphics.h"
+#include "game.h"
 
 int main()
 {
-  Graphics graphics{};
+  Game game{};
 
-  while (true)
-  {
-    graphics.render();
-  }
+  game.run();
 
   return 0;
 }

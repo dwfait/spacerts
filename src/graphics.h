@@ -3,13 +3,15 @@
 
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
+#include "SFML/Graphics/Text.hpp"
+#include "state.h"
 
 class Graphics
 {
   public:
     Graphics();
 
-    void render();
+    void render(StatePtr state);
 
   private:
     sf::RenderWindow window;

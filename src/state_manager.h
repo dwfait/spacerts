@@ -4,14 +4,22 @@
 #include "state.h"
 #include <vector>
 
+#include "state_repository.h"
+
 class StateManager
 {
   public:
-    unsigned int state_count();
-    void add(State& state);
+    StateManager(StatePtr initial_state);
+
+    void add(StatePtr state);
+    StatePtr current_state();
+    void update_current_state();
+
 
   private:
-    std::vector<State> states;
+    StateRepository m_repo;
+
+    StatePtr m_current_state;
 
 };
 
